@@ -1,0 +1,17 @@
+name: basic-ci
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate YAML
+        uses: ibiqlik/action-yamllint@v3
+      - name: Python Lint (ruff)
+        uses: chartboost/ruff-action@v1
+        with:
+          src: "06-automation/scripts"
